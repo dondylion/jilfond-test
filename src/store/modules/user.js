@@ -43,6 +43,7 @@ export default {
     },
     mutations: {
         updateUsers(state, users) {
+            if(!_.find(users, state.currentUser)) state.currentUser = null;
             state.users = users;
         },
         updateText(state, text) {
