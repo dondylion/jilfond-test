@@ -1,19 +1,26 @@
 <template>
-    <div class="user-card">
-        <div class="user-card-image"><UserImage/></div>
-        <div class="user-card-info">
-            <p class="user-name">{{user.name}}</p>
+    <div
+        class="user-card"
+        v-on:click="setUser(user.id)"
+    >
+        <div class="user-card-image"><Image1/></div>
+        <div
+            class="user-card-info"
+            v-bind:class="{select: getCurrentUser && getCurrentUser.id === user.id}"
+        >
+            <p class="user-name">{{user.username}}</p>
             <p class="user-email">{{user.email}}</p>
         </div>
     </div>
 </template>
 
 <script>
-    import UserImage from '@/components/UserImage';
+    import Image1 from '@/components/Images/Image1';
+    import {mapActions, mapGetters} from 'vuex';
 
     export default {
         components: {
-            UserImage
+            Image1
         },
         props: {
             user: {
@@ -21,6 +28,8 @@
                 required: true
             }
         },
+        methods: mapActions(["setUser"]),
+        computed: mapGetters(["getCurrentUser"]),
     }
 </script>
 
@@ -44,6 +53,9 @@
         &-info {
             padding: 15px;
             font-size: 14px;
+            width: 100%;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
             p {
                 margin: 0;
             }
@@ -56,5 +68,8 @@
         .user-email {
             color: #76787D;
         }
+    }
+    .select {
+        background: #E0E0E0;
     }
 </style>
