@@ -4,7 +4,11 @@ const debounced = _.debounce((users, ctx) => {
     let url = 'https://jsonplaceholder.typicode.com/users?';
     users = users.split(',');
     users.map((item, index) => {
-        url = `${url}username=${item.trim()}`;
+        if (!!Number(item)) {
+            url = `${url}id=${Number(item.trim())}`;
+        } else {
+            url = `${url}username=${item.trim()}`;
+        }
         if (index + 1 !== users.length) url = url + '&';
     })
     fetch(url)
