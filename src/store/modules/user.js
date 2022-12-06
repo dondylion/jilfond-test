@@ -18,8 +18,7 @@ const debounced = _.debounce((users, ctx) => {
             ctx.commit('updateUsers', json);
             ctx.commit('updateLoader', false);
         })
-        .catch((error) => {
-            console.dir(error)
+        .catch(() => {
             Vue.notify({
                 group: 'foo',
                 title: 'Что-то пошло не так',

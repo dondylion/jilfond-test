@@ -6,7 +6,7 @@
 
         <div v-else class="selected">
             <div class="user-image">
-                <Image2/>
+                <img src="./Images/image2.png" alt="avatar"/>
             </div>
             <div class="user-info">
                 <div class="user-name">
@@ -37,13 +37,9 @@
 </template>
 
 <script>
-    import Image2 from '@/components/Images/Image2';
     import {mapGetters} from 'vuex';
 
     export default {
-        components: {
-            Image2
-        },
         computed: mapGetters(["getCurrentUser"]),
     }
 </script>
@@ -71,7 +67,7 @@
             justify-content: flex-start;
             text-align: start;
         }
-        &-image {
+        &-image img {
             width: 424px;
             margin-right: 60px;
         }
