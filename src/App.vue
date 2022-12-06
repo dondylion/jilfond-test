@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications group="foo" />
     <div class="header">
       <span>Жилфонд</span>
       <span>Пользователь</span>
@@ -35,6 +36,9 @@
         color: #E31F24;
         font-weight: 700;
       }
+    }
+    svg {
+      flex-shrink: 0;
     }
   }
 </style>

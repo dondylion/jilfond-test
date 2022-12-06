@@ -1,13 +1,14 @@
 import _ from 'lodash';
+import Vue from 'vue';
 
 const debounced = _.debounce((users, ctx) => {
     let url = 'https://jsonplaceholder.typicode.com/users?';
     users = users.split(',');
     users.map((item, index) => {
-        if (!!Number(item)) {
-            url = `${url}id=${Number(item.trim())}`;
-        } else {
-            url = `${url}username=${item.trim()}`;
+        if (item.length > 0) {
+            url = !!Number(item.trim()) ?
+                `${url}id=${Number(item.trim())}` :
+                `${url}username=${item.trim()}`;
         }
         if (index + 1 !== users.length) url = url + '&';
     })
@@ -17,7 +18,16 @@ const debounced = _.debounce((users, ctx) => {
             ctx.commit('updateUsers', json);
             ctx.commit('updateLoader', false);
         })
-        .catch(() => ctx.commit('updateLoader', false));
+        .catch((error) => {
+            console.dir(error)
+            Vue.notify({
+                group: 'foo',
+                title: 'Что-то пошло не так',
+                text: 'Попробуйте ввести другой запрос',
+                type: 'error',
+            })
+            ctx.commit('updateLoader', false)
+        });
 }, 300);
 
 export default {
